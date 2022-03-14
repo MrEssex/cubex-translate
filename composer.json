@@ -1,0 +1,25 @@
+{
+  "name": "mressex/cubex-translate",
+  "license": "MIT",
+  "description": "Translate Cubex Framework",
+  "authors": [
+    {
+      "name": "Kyle Essex",
+      "email": "kylegavinessex@hotmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "statickidz/php-google-translate-free": "^1.2",
+    "packaged/rwd": "^1.4",
+    "cubex/framework": "^4.18"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "MrEssex\\CubexTranslate\\": "src/"
+    }
+  }
+}
