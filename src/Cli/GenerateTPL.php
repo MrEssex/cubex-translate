@@ -10,6 +10,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateTPL extends ConsoleCommand
 {
+  public const DEFAULT = '/\$this->_\((?:\W?)*[\'"]([^\'"]*)[\'"],(?:[\W])*[\'"](.*)[\'"](?:,(?:[\W\w])*\])?(?:\W)*\)/';
+  public const MD5 = '/\$this->_t\((?:\W?)*[\'"](.*)[\'"](?:,(?:[\W\w])*\])?(?:\W)*\)/';
+  public const PLURAL = '/\$this->_p\((?:\W?)*[\'"](.*)[\'"],(?:\W?)*(.*)[\'"],(?:\W\w)(?:\W\w?)*\)/';
+  public const SIMPLE_PLURAL = '/\$this->_sp\((?:\W?)*[\'"](.*)[\'"],(?:[\W\w}].)*\)/';
+
   private static array $replacements = [
     '(s)'  => 's',
     '(fe)' => 'ves',
@@ -40,11 +45,10 @@ class GenerateTPL extends ConsoleCommand
   {
     $contents = file_get_contents($file->getPathname());
     $regex = [
-      '/\$this->_\((?:\W?)*[\'"]([^\'"]*)[\'"],(?:[\W])*[\'"](.*)[\'"](?:,(?:[\W\w])*\])?(?:\W)*\)/' => '_processDefault',
-      '/\$this->_t\((?:\W?)*[\'"](.*)[\'"](?:,(?:[\W\w])*\])?(?:\W)*\)/'                             => '_processMD5',
-      '/\$this->_p\((?:\W?)*[\'"](.*)[\'"],(?:\W?)*(.*)[\'"],(?:\W\w)(?:\W\w?)*\)/'                  => '_processPlural',
-      '/\$this->_sp\((?:\W?)*[\'"](.*)[\'"],(?:\W\w)(?:\W\w?)*\)/'                                   => '_processSimplePlural',
-
+      self::DEFAULT       => '_processDefault',
+      self::MD5           => '_processMD5',
+      self::PLURAL        => '_processPlural',
+      self::SIMPLE_PLURAL => '_processSimplePlural',
     ];
 
     foreach($regex as $r => $method)
