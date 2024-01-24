@@ -138,7 +138,7 @@ class GenerateTPL extends ConsoleCommand
     $this->_writeCatalog($catalog);
   }
 
-  protected function _writeCatalog($catalog)
+  protected function _writeCatalog(DynamicArrayCatalog $catalog)
   {
     $root = rtrim($this->getContext()->getProjectRoot(), DIRECTORY_SEPARATOR);
     $transDir = $root . DIRECTORY_SEPARATOR . 'translations' . DIRECTORY_SEPARATOR;

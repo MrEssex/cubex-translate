@@ -72,12 +72,24 @@ class Potoar extends ConsoleCommand
       {
         foreach($translation->getReferences() as $ref)
         {
+          $out[] = "'" . $ref . "' => [";
+
           if($translation->getSingularTranslation())
           {
-            $out[] = "'" . $ref . "' => ['_' => '"
-              . addcslashes(stripslashes($this->_toTranslation($translation->getSingularTranslation())), "'")
-              . "'],";
+            $out[] = "'_' => '" . addcslashes(
+                stripslashes($this->_toTranslation($translation->getSingularTranslation())),
+                "'"
+              ) . "',";
           }
+
+          if($translation->getPluralTranslation())
+          {
+            $out[] = "'2..n' => '" . addcslashes(
+                stripslashes($this->_toTranslation($translation->getPluralTranslation())),
+                "'"
+              ) . "',";
+          }
+          $out[] = "],";
         }
       }
     }

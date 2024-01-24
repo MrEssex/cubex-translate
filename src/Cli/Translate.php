@@ -84,7 +84,16 @@ class Translate extends ConsoleCommand
       unset($options['n']);
     }
 
-    $tran->setAdditionalPluralTranslations($options);
+    if(isset($options['n..0,2..n']))
+    {
+      $tran->setSingularSource($options[1]);
+      $tran->setPluralSource($options['n..0,2..n']);
+
+      $tran->setSingularTranslation($this->_getTranslation($options[1], $lang));
+      $tran->setPluralTranslation($this->_getTranslation($options['n..0,2..n'], $lang));
+      unset($options['n..0,2..n']);
+    }
+
     $poEdit->addTranslation($tran);
   }
 
