@@ -40,10 +40,10 @@ class GenerateTPL extends ConsoleCommand
   {
     $contents = file_get_contents($file->getPathname());
     $regex = [
-      '/\$this->_\((?:\W?)*[\'"](.*)[\'"],(?:\W)*[\'"](.*)[\'"](?:,(?:[\W\w])*\])?(?:\W)*\)/' => '_processDefault',
-      '/\$this->_t\((?:\W?)*[\'"](.*)[\'"](?:,(?:[\W\w])*\])?(?:\W)*\)/'                      => '_processMD5',
-      '/\$this->_p\((?:\W?)*[\'"](.*)[\'"],(?:\W?)*(.*)[\'"],(?:\W\w)(?:\W\w?)*\)/'           => '_processPlural',
-      '/\$this->_sp\((?:\W?)*[\'"](.*)[\'"],(?:\W\w)(?:\W\w?)*\)/'                            => '_processSimplePlural',
+      '/\$this->_\((?:\W?)*[\'"]([^\'"]*)[\'"],(?:[\W])*[\'"](.*)[\'"](?:,(?:[\W\w])*\])?(?:\W)*\)/' => '_processDefault',
+      '/\$this->_t\((?:\W?)*[\'"](.*)[\'"](?:,(?:[\W\w])*\])?(?:\W)*\)/'                             => '_processMD5',
+      '/\$this->_p\((?:\W?)*[\'"](.*)[\'"],(?:\W?)*(.*)[\'"],(?:\W\w)(?:\W\w?)*\)/'                  => '_processPlural',
+      '/\$this->_sp\((?:\W?)*[\'"](.*)[\'"],(?:\W\w)(?:\W\w?)*\)/'                                   => '_processSimplePlural',
 
     ];
 
