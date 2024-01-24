@@ -2,14 +2,17 @@
 
 namespace MrEssex\CubexTranslate\Cli;
 
-use Cubex\Console\ConsoleCommand;
+use MrEssex\CubexCli\ConsoleCommand;
 use MrEssex\CubexTranslate\CubexTranslate;
+use MrEssex\CubexTranslate\PluralForms;
 use Packaged\Helpers\ValueAs;
 use Packaged\I18n\Catalog\DynamicArrayCatalog;
 use Packaged\I18n\Catalog\Message;
 use Packaged\I18n\Tools\Gettext\PoFile;
 use Packaged\I18n\Tools\Gettext\PoTranslation;
 use Packaged\Rwd\Language\LanguageCode;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Translate extends ConsoleCommand
 {
@@ -18,7 +21,7 @@ class Translate extends ConsoleCommand
   /** @flag */
   public $common;
 
-  public function process(): void
+  protected function executeCommand(InputInterface $input, OutputInterface $output): void
   {
     if(!$this->lang && $this->common)
     {
@@ -33,7 +36,11 @@ class Translate extends ConsoleCommand
     foreach(ValueAs::arr($this->lang) as $lang)
     {
       $poLoc = $location . $lang . '.po';
-      $poEdit = file_exists($poLoc) ? PoFile::fromString(file_get_contents($poLoc)) : new PoFile($lang);
+
+      $poEdit = file_exists($poLoc) ?
+        PoFile::fromString(file_get_contents($poLoc)) :
+        new PoFile($lang, PluralForms::getPluralForm($lang));
+
       $template = DynamicArrayCatalog::fromFile($location . '_tpl.php');
 
       foreach($template->getData() as $mid => $options)
@@ -93,7 +100,7 @@ class Translate extends ConsoleCommand
 
   protected function _translationsDir(): string
   {
-    // Assuming this will be run from vendor
-    return dirname(__DIR__, 5) . '/translations/';
+    $root = rtrim($this->getContext()->getProjectRoot(), DIRECTORY_SEPARATOR);
+    return $root . DIRECTORY_SEPARATOR . 'translations' . DIRECTORY_SEPARATOR;
   }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace MrEssex\CubexTranslate\Cli;
 
-use Cubex\Console\ConsoleCommand;
+use MrEssex\CubexCli\ConsoleCommand;
 use MrEssex\CubexTranslate\CubexTranslate;
 use Packaged\Helpers\ValueAs;
 use Packaged\I18n\Tools\Gettext\PoFile;
@@ -34,7 +34,8 @@ class Potoar extends ConsoleCommand
 
   protected function _translationsDir(): string
   {
-    return dirname(__DIR__, 5) . '/translations/';
+    $root = rtrim($this->getContext()->getProjectRoot(), DIRECTORY_SEPARATOR);
+    return $root . DIRECTORY_SEPARATOR . 'translations' . DIRECTORY_SEPARATOR;
   }
 
   /**

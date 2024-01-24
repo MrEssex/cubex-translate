@@ -9,10 +9,12 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.0",
     "statickidz/php-google-translate-free": "^1.2",
     "packaged/rwd": "^1.4",
-    "cubex/framework": "^4.18"
+    "packaged/i18n": "^1.6.0",
+    "google/cloud-translate": "^1.17.0",
+    "mressex/cubex-cli": "^0.1.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"
