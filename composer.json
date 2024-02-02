@@ -14,14 +14,17 @@
     "packaged/rwd": "^1.4",
     "packaged/i18n": "^1.6.0",
     "google/cloud-translate": "^1.17.0",
-    "mressex/cubex-cli": "^0.1.0"
+    "mressex/cubex-cli": "^0.1.0",
+    "permafrost-dev/php-code-search": "^1.11"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-latest"
+    "roave/security-advisories": "dev-latest",
+    "phpunit/phpunit": "^10.5.9"
   },
   "autoload": {
     "psr-4": {
-      "MrEssex\\CubexTranslate\\": "src/"
+      "MrEssex\\CubexTranslate\\": "src/",
+      "MrEssex\\CubexTranslate\\Tests\\": "tests/"
     }
   }
 }
